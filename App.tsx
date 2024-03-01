@@ -8,11 +8,13 @@
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Image,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   useColorScheme,
   View,
 } from 'react-native';
@@ -25,72 +27,57 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+function ContactComponent(): React.JSX.Element {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
+    <TouchableOpacity
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: 15,
+        borderBottomColor: 'grey',
+        borderBottomWidth: 1,
+        paddingLeft: 15,
+      }}>
+      <Image
+        source={require('./src/assets/images/blankProfilePic.png')}
+        style={{width: 50, height: 50, borderRadius: 20}} // Specify width and height
+      />
+      <Text style={{marginLeft: 10, color: 'black', fontSize: 18}}>
+        User Name
       </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
+    <SafeAreaView>
+      <View
+        style={{
+          backgroundColor: 'green',
+          paddingVertical: 20,
+          paddingLeft: 10,
+        }}>
+        <Text style={{fontSize: 20, fontWeight: '500', color: 'white'}}>
+          Messages
+        </Text>
+      </View>
+      <ScrollView>
+        <ContactComponent />
+        <ContactComponent />
+        <ContactComponent />
+        <ContactComponent />
+        <ContactComponent />
+        <ContactComponent />
+        <ContactComponent />
+        <ContactComponent />
+        <ContactComponent />
+        <ContactComponent />
+        <ContactComponent />
+        <ContactComponent />
+        <ContactComponent />
+        <ContactComponent />
+        <ContactComponent />
       </ScrollView>
     </SafeAreaView>
   );
