@@ -5,51 +5,34 @@
  * @format
  */
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  Image,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  useColorScheme,
-  View,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {SafeAreaView, ScrollView, Text, View} from 'react-native';
+import {Contact} from './src/Types/Contact';
+import ContactComponent from './src/Components/ContactComponents';
+import {faker} from '@faker-js/faker';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-function ContactComponent(): React.JSX.Element {
-  return (
-    <TouchableOpacity
-      style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingVertical: 15,
-        borderBottomColor: 'grey',
-        borderBottomWidth: 1,
-        paddingLeft: 15,
-      }}>
-      <Image
-        source={require('./src/assets/images/blankProfilePic.png')}
-        style={{width: 50, height: 50, borderRadius: 20}} // Specify width and height
-      />
-      <Text style={{marginLeft: 10, color: 'black', fontSize: 18}}>
-        User Name
-      </Text>
-    </TouchableOpacity>
-  );
+function createRandomUser(): Contact {
+  return {
+    id: faker.string.uuid(),
+    name: faker.person.firstName(),
+    picture: faker.image.urlLoremFlickr({category: 'people'}),
+  };
 }
 
 function App(): React.JSX.Element {
+  const [contacts, setContacts] = useState<Contact[]>([]);
+
+  useEffect(() => {
+    setContacts(prevContacts => {
+      const updatedContacts = [];
+      for (var i = 0; i < 20; i++) {
+        const user: Contact = createRandomUser();
+        updatedContacts.push(user);
+      }
+      return [...prevContacts, ...updatedContacts];
+    });
+  }, []);
+
   return (
     <SafeAreaView>
       <View
@@ -59,47 +42,21 @@ function App(): React.JSX.Element {
           paddingLeft: 10,
         }}>
         <Text style={{fontSize: 20, fontWeight: '500', color: 'white'}}>
-          Messages
+          Messages{' '}
         </Text>
       </View>
       <ScrollView>
-        <ContactComponent />
-        <ContactComponent />
-        <ContactComponent />
-        <ContactComponent />
-        <ContactComponent />
-        <ContactComponent />
-        <ContactComponent />
-        <ContactComponent />
-        <ContactComponent />
-        <ContactComponent />
-        <ContactComponent />
-        <ContactComponent />
-        <ContactComponent />
-        <ContactComponent />
-        <ContactComponent />
+        {contacts.map(item => (
+          <ContactComponent
+            id={item.id}
+            key={item.id}
+            name={item.name}
+            picture={item.picture}
+          />
+        ))}
       </ScrollView>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
