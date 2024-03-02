@@ -11,7 +11,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({children}) => {
       style={{
         backgroundColor: 'green',
         paddingVertical: 20,
-        paddingLeft: 10,
+        paddingHorizontal: 10,
         flexDirection: 'row',
         alignItems: 'center',
       }}>
