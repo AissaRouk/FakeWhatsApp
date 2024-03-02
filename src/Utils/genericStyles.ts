@@ -16,4 +16,10 @@ export const genericStyles = StyleSheet.create({
     fontWeight: '500',
     color: 'white',
   },
+  headerHorizontalAlignment: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
 });
+
+export const whiteColor = '#FFFF';
