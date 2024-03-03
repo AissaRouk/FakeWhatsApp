@@ -4,6 +4,9 @@ import {useState, useEffect} from 'react';
 import {Contact} from '../Types/Contact';
 import createRandomUser from '../Utils/createRandomUser';
 import HeaderComponent from '../Components/HeaderComponent';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {whiteColor} from '../Utils/genericStyles';
+import auth from '@react-native-firebase/auth';
 
 export default function MainScreen({navigation}: any) {
   const [contacts, setContacts] = useState<Contact[]>([]);
@@ -25,6 +28,13 @@ export default function MainScreen({navigation}: any) {
         <Text style={{fontSize: 20, fontWeight: '500', color: 'white'}}>
           Messages
         </Text>
+        <Icon
+          name="log-out-outline"
+          color={whiteColor}
+          size={30}
+          style={{marginLeft: 30}}
+          onPress={() => auth().signOut()}
+        />
       </HeaderComponent>
       <ScrollView>
         {contacts.map(item => (
