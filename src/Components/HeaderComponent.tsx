@@ -1,5 +1,6 @@
 import React, {ReactNode} from 'react';
 import {View} from 'react-native';
+import {greenColor} from '../Utils/genericStyles';
 
 type HeaderComponentProps = {
   children?: ReactNode;
@@ -9,7 +10,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({children}) => {
   return (
     <View
       style={{
-        backgroundColor: 'green',
+        backgroundColor: greenColor,
         paddingVertical: 20,
         paddingHorizontal: 10,
         flexDirection: 'row',
