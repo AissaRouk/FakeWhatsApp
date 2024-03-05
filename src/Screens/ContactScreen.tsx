@@ -33,6 +33,11 @@ export default function ContactScreen({
           content: message,
           owner: 0,
         },
+        {
+          id: prevMessages.length + 2,
+          content: 'response',
+          owner: 1,
+        },
       ]);
     setMessage('');
   };
@@ -110,7 +115,7 @@ export default function ContactScreen({
         </View>
       </HeaderComponent>
 
-      <ScrollView style={{paddingTop: 10}}>
+      <ScrollView style={{paddingTop: 10, paddingBottom: 10}}>
         {messages.map(item => (
           <MessageComponent key={item.id} message={item} />
         ))}
@@ -140,9 +145,7 @@ export default function ContactScreen({
           }}
           value={message}
           onChangeText={setMessage}
-          onSubmitEditing={() => {
-            sendMessage();
-          }}
+          multiline={true}
         />
         <TouchableOpacity
           style={{marginLeft: 15}}
