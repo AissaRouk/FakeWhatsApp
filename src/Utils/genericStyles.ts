@@ -22,4 +22,5 @@ export const genericStyles = StyleSheet.create({
   },
 });
 
-export const whiteColor = '#FFFF';
+export const whiteColor = '#FFFF',
+  greenColor = 'green';
